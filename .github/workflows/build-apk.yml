@@ -43,8 +43,6 @@ jobs:
           test -f package.json
       - name: Instalar dependências Node
         run: npm install --ignore-scripts --legacy-peer-deps
-      - name: Instalar dependência de detecção de palavra-chave
-        run: npm install @picovoice/porcupine-web --save --ignore-scripts --legacy-peer-deps
       - name: Testes estáticos e regressão
         run: npm run test:all
       - name: Preparar os recursos web do aplicativo
@@ -55,6 +53,8 @@ jobs:
         run: |
           npx cap add android
           npx cap sync android
+      - name: Aplicar dependência nativa Porcupine
+        run: python3 patch_gradle.py android/app/build.gradle
       - name: Aplicar identidade, permissões e versão nativas
         run: |
           D=android/app/src/main/java/com/jarvis/nova
