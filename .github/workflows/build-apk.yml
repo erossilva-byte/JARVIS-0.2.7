@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'JARVIS-NOVA-1.2.5-fonte.zip'
+      - '.github/workflows/build-apk.yml'
 
 permissions:
   contents: read
@@ -42,6 +43,8 @@ jobs:
           test -f package.json
       - name: Instalar dependências Node
         run: npm install --ignore-scripts --legacy-peer-deps
+      - name: Instalar dependência de detecção de palavra-chave
+        run: npm install @picovoice/porcupine-web --save --ignore-scripts --legacy-peer-deps
       - name: Testes estáticos e regressão
         run: npm run test:all
       - name: Preparar os recursos web do aplicativo
