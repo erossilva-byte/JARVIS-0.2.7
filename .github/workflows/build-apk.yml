@@ -41,7 +41,7 @@ jobs:
             unzip -q JARVIS-NOVA-1.2.7-fonte.zip -d /tmp/jarvis-source
             SRC=/tmp/jarvis-source/JARVIS-NOVA
             test -f "$SRC/package.json"
-            find "$SRC" -mindepth 1 -maxdepth 1 ! -name '.github' -exec cp -a {} . \\;
+            find "$SRC" -mindepth 1 -maxdepth 1 ! -name '.github' -exec cp -a {} . \;
           fi
           test -f package.json || { echo 'Envie JARVIS-NOVA-1.2.7-fonte.zip para a raiz do repositório antes de executar o build.'; exit 1; }
 
