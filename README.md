@@ -1,13 +1,19 @@
-# J.A.R.V.I.S. Nova 1.2.0
+# J.A.R.V.I.S. Nova 1.2.5
 
-Este repositório contém a configuração para validar e compilar o APK Android pelo GitHub Actions.
+Este repositório prepara e compila a fonte Android pelo GitHub Actions.
 
-## Enviar a fonte e gerar o APK
+## Gerar o APK
 
-1. Baixe o arquivo `JARVIS-NOVA-1.2.0-fonte.zip` disponibilizado no chat.
-2. Na página principal deste repositório, escolha **Add file → Upload files** e envie o ZIP para a raiz do repositório.
-3. Confirme o commit na branch `main`. O envio do ZIP inicia o workflow **Build e testes do J.A.R.V.I.S. Nova**.
-4. Abra **Actions**, entre na execução e aguarde os testes e a compilação terminarem com sucesso.
-5. Baixe o artefato `JARVIS-Nova-1.2.0-APK`. O ZIP do artefato contém `app-debug.apk` e seu checksum SHA-256.
+1. Baixe no ChatGPT o arquivo **JARVIS-NOVA-1.2.5-fonte.zip**.
+2. Na página inicial do repositório, escolha **Add file → Upload files** e envie esse ZIP para a raiz do repositório.
+3. Faça o commit na branch `main`. O workflow **Build e testes do J.A.R.V.I.S. Nova** será iniciado.
+4. Abra **Actions**, entre na execução e aguarde os testes e a compilação.
+5. Se a execução terminar com sucesso, baixe o artefato **JARVIS-Nova-1.2.5-APK**. Ele contém `app-debug.apk` e o checksum SHA-256.
 
-O APK só será disponibilizado se os testes e a compilação terminarem com sucesso. O arquivo APK de depuração não é assinado para distribuição na Play Store. Teste-o no aparelho antes de confiar em recursos de voz, alarmes, notificações e segundo plano.
+## Importante
+
+- O APK só é publicado se os testes e a compilação terminarem com sucesso.
+- Esta compilação é de depuração, não é assinada para publicação na Play Store.
+- O build não comprova o funcionamento em um celular. Teste a ativação por voz, permissões, alarmes, notificações e segundo plano no dispositivo.
+- Não envie AccessKeys ou chaves de provedores de IA ao repositório público.
+- O detector Picovoice exige uma AccessKey configurada no aplicativo; não coloque a chave no código-fonte.
