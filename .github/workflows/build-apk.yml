@@ -6,7 +6,6 @@ on:
     branches: [main]
     paths:
       - 'JARVIS-NOVA-1.2.5-fonte.zip'
-      - '.github/workflows/build-apk.yml'
 
 permissions:
   contents: read
@@ -23,18 +22,15 @@ jobs:
     steps:
       - name: Baixar o repositório
         uses: actions/checkout@v4
-
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Configurar Java para o Android
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-
       - name: Extrair código-fonte 1.2.5
         run: |
           test -f JARVIS-NOVA-1.2.5-fonte.zip || { echo 'Envie JARVIS-NOVA-1.2.5-fonte.zip para a raiz do repositório.'; exit 1; }
@@ -44,23 +40,18 @@ jobs:
           test -f "$SRC/package.json"
           find "$SRC" -mindepth 1 -maxdepth 1 ! -name '.github' -exec cp -a {} . \;
           test -f package.json
-
       - name: Instalar dependências Node
         run: npm install --ignore-scripts --legacy-peer-deps
-
       - name: Testes estáticos e regressão
         run: npm run test:all
-
       - name: Preparar os recursos web do aplicativo
         run: |
           mkdir -p www
           cp index.html style.css app.js apps.js www/
-
       - name: Gerar estrutura nativa do Android
         run: |
           npx cap add android
           npx cap sync android
-
       - name: Aplicar identidade, permissões e versão nativas
         run: |
           D=android/app/src/main/java/com/jarvis/nova
@@ -69,7 +60,6 @@ jobs:
           python3 patch_manifest.py android/app/src/main/AndroidManifest.xml
           python3 patch_android_version.py android/app/build.gradle VERSAO.json
           python3 patch_visual.py android
-
       - name: Compilar APK debug
         working-directory: android
         run: |
@@ -81,7 +71,6 @@ jobs:
           fi
           test -s app/build/outputs/apk/debug/app-debug.apk
           sha256sum app/build/outputs/apk/debug/app-debug.apk | tee apk-sha256.txt
-
       - name: Publicar APK e checksum
         uses: actions/upload-artifact@v4
         with:
